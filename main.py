@@ -98,6 +98,25 @@ def edit_project(project):
     except ProjectValidationError as e:
         print(f"Error updating project: {e}\n")
 
+def delete_project_interactively(store: MemoryStore):
+    show_projects(store)
+    projects = store.list_projects()
+    if not projects:
+        return
+
+    pid = input("Enter the project ID to delete: ").strip()
+    project = store.get_project(pid)
+    if not project:
+        print("No project found with that ID.\n")
+        return
+
+    confirm = input(f"Are you sure you want to delete project '{project.name}' and all its tasks? (Y/N): ").strip().lower()
+    if confirm == "y":
+        store.remove_project(pid)
+        print(f"Project '{project.name}' and all its tasks have been deleted.\n")
+    else:
+        print("Deletion cancelled.\n")
+
 def manage_tasks_menu(project):
     if not project.tasks:
         print("This project has no tasks.\n")
@@ -172,7 +191,8 @@ def main():
         print("1. List projects")
         print("2. Create new project")
         print("3. Select a project")
-        print("4. Quit")
+        print("4. Delete a project")
+        print("5. Quit")
 
         choice = input("Select an option: ").strip()
         if choice == "1":
@@ -184,6 +204,8 @@ def main():
             if project:
                 project_submenu(project)
         elif choice == "4":
+            delete_project_interactively(store)
+        elif choice == "5":
             print("Goodbye!")
             break
         else:
