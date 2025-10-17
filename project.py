@@ -51,31 +51,36 @@ def _format_created_at(iso_str: str) -> str:
 
 class Project:
     name: str
-    description: Optional[str] = ""
-    tasks: List["Task"] = field(default_factory=list)
-    created_at: str = field(default_factory=_now_iso)
-    id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    description: Optional[str]
+    tasks: List["Task"]
+    created_at: str
+    id: str
 
-    MAX_NAME_LEN: int = field(init=False, default=30)
-    MAX_DESCRIPTION_LEN: int = field(init=False, default=150)
+    MAX_NAME_LEN: int = 30
+    MAX_DESCRIPTION_LEN: int = 150
 
-    def __post_init__(self) -> None:
-        if self.name is None:
-            self.name = ""
+    def __init__(self, name: str, description: Optional[str] = "") -> None:
+        if name is None:
+            name = ""
 
-        self.name = self.name.strip()
+        name = name.strip()
+        if description is None:
+            description = ""
 
-        if self.description is None:
-            self.description = ""
-
-        if not self.name:
+        if not name:
             raise ProjectNameRequiredError("Project name is required and cannot be empty.")
 
-        if len(self.name) > self.MAX_NAME_LEN:
+        if len(name) > self.MAX_NAME_LEN:
             raise ProjectNameTooLongError(f"Project name must be at most {self.MAX_NAME_LEN} characters.")
 
-        if len(self.description) > self.MAX_DESCRIPTION_LEN:
+        if len(description) > self.MAX_DESCRIPTION_LEN:
             raise ProjectDescriptionTooLongError(f"Project description must be at most {self.MAX_DESCRIPTION_LEN} characters.")
+
+        self.name = name
+        self.description = description
+        self.tasks = []
+        self.created_at = _now_iso()
+        self.id = str(uuid.uuid4())
 
     def view(self) -> Dict[str, Any]:
         return {
