@@ -92,6 +92,24 @@ class Project:
             "tasks": [getattr(t, "id", None) for t in self.tasks],
         }
 
+    def update_name(self, new_name: str) -> None:
+        new_name = (new_name or "").strip()
+        if not new_name:
+            raise ProjectNameRequiredError("Project name cannot be empty.")
+        if len(new_name) > config.PROJECT_MAX_NAME_LEN:
+            raise ProjectNameTooLongError(
+                f"Project name must be at most {config.PROJECT_MAX_NAME_LEN} characters."
+            )
+        self.name = new_name
+
+    def update_description(self, new_desc: str | None) -> None:
+        new_desc = (new_desc or "").strip()
+        if len(new_desc) > config.PROJECT_MAX_DESCRIPTION_LEN:
+            raise ProjectDescriptionTooLongError(
+                f"Project description must be at most {config.PROJECT_MAX_DESCRIPTION_LEN} characters."
+            )
+        self.description = new_desc
+
     def pretty(self, width: int = 72) -> str:
         header = f"Project: {self.name}  (id: {self.id})"
         created = f"Created: {_format_created_at(self.created_at)}"
