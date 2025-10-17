@@ -108,6 +108,7 @@ def manage_tasks_menu(project):
 
         for idx, task in enumerate(project.tasks, start=1):
             print(f"{idx}. {task.name} | status: {task.state.value} | id: {task.id}")
+            print(f"   Description: {task.description}")
 
         print(f"{len(project.tasks)+1}. Return to project menu")
 
