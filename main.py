@@ -2,6 +2,7 @@ from project import Project, ProjectValidationError
 from memory import MemoryStore
 from task import Task, TaskState
 from config import PROJECT_MAX_COUNT, TASK_MAX_COUNT
+from utils import is_project_name_taken
 
 def show_projects(store: MemoryStore):
     print("\n--- Projects in Memory ---")
@@ -22,6 +23,10 @@ def create_project_interactively(store: MemoryStore):
         return
 
     name = input("Enter project name: ").strip()
+    if is_project_name_taken(store, name):
+        print(f"A project with the name '{name}' already exists.\n")
+        return
+
     desc = input("Enter project description (optional): ").strip()
 
     try:
