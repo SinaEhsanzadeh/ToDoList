@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecb20c7c-11c9-481a-9f5e-ddb7ae3705f9" name="Changes" comment="feat: add memory store class">
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="ecb20c7c-11c9-481a-9f5e-ddb7ae3705f9" name="Changes" comment="feat: make main script and terminal user interface">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/project.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +98,23 @@
       <option name="project" value="LOCAL" />
       <updated>1760715927978</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix: change data types of some variables">
+      <option name="closed" value="true" />
+      <created>1760716605792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760716605792</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: make main script and terminal user interface">
+      <option name="closed" value="true" />
+      <created>1760716634210</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760716634210</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,6 +132,8 @@
     <MESSAGE value="init: set up starting skeleton for program" />
     <MESSAGE value="feat: add project class" />
     <MESSAGE value="feat: add memory store class" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add memory store class" />
+    <MESSAGE value="fix: change data types of some variables" />
+    <MESSAGE value="feat: make main script and terminal user interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: make main script and terminal user interface" />
   </component>
 </project>
