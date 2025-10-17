@@ -173,7 +173,7 @@ def manage_tasks_menu(project):
             if action == "1":
                 edit_task(task)
             elif action == "2":
-                confirm = input(f"Are you sure you want to delete task '{task.name}'? (y/N): ").strip().lower()
+                confirm = input(f"Are you sure you want to delete task '{task.name}'? (Y/N): ").strip().lower()
                 if confirm == "y":
                     project.remove_task(task.id)
                     print(f"Task '{task.name}' deleted.\n")
