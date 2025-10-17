@@ -63,7 +63,7 @@ def view_project_details(store: MemoryStore):
     else:
         print("No project found with that ID.\n")
 
-def project_submenu(project):
+def project_submenu(project, store: MemoryStore):
     while True:
         print(f"\n=== Project Menu: {project.name} ===")
         print("1. View project details")
@@ -79,7 +79,7 @@ def project_submenu(project):
         elif choice == "2":
             add_task_to_project(project)
         elif choice == "3":
-            edit_project(project)
+            edit_project(project, store)
         elif choice == "4":
             manage_tasks_menu(project)
         elif choice == "5":
@@ -88,11 +88,14 @@ def project_submenu(project):
         else:
             print("Invalid option, try again.\n")
 
-def edit_project(project):
+def edit_project(project, store: MemoryStore):
     print(f"\n--- Editing Project: {project.name} ---")
     print("Leave fields empty to keep current values.")
 
     new_name = input(f"New name: ").strip()
+    if new_name and is_project_name_taken(store, new_name, exclude_id=project.id):
+        print(f"A project with the name '{new_name}' already exists.\n")
+        return
     new_desc = input(f"New description: ").strip()
 
     try:
@@ -258,7 +261,7 @@ def main():
         elif choice == "3":
             project = select_project_interactively(store)
             if project:
-                project_submenu(project)
+                project_submenu(project, store)
         elif choice == "4":
             delete_project_interactively(store)
         elif choice == "5":
