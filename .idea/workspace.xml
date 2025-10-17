@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecb20c7c-11c9-481a-9f5e-ddb7ae3705f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ToDoList.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ecb20c7c-11c9-481a-9f5e-ddb7ae3705f9" name="Changes" comment="feat: add is task name taken function">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SinaEhsanzadeh&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SinaEhsanzadeh/ToDoList.git&quot;,
+    &quot;accountId&quot;: &quot;57756a2b-a3c1-4bc5-9810-67c5d19867ff&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="34CMsP1lZX8dY3x9OguR8SSMS92" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,9 +51,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
+    "Python.project.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "feature/prevent-repetition",
     "junie.onboarding.icon.badge.shown": "true",
     "to.speed.mode.migration.done": "true"
   }
@@ -49,6 +76,180 @@
       <option name="presentableId" value="Default" />
       <updated>1760713306897</updated>
     </task>
+    <task id="LOCAL-00001" summary="init: set up starting skeleton for program">
+      <option name="closed" value="true" />
+      <created>1760713969310</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1760713969310</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: add project class">
+      <option name="closed" value="true" />
+      <created>1760715665016</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1760715665016</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: add memory store class">
+      <option name="closed" value="true" />
+      <created>1760715927978</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760715927978</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: change data types of some variables">
+      <option name="closed" value="true" />
+      <created>1760716605792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760716605792</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: make main script and terminal user interface">
+      <option name="closed" value="true" />
+      <created>1760716634210</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760716634210</updated>
+    </task>
+    <task id="LOCAL-00006" summary="chore: create gitignore">
+      <option name="closed" value="true" />
+      <created>1760716836347</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760716836347</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add task class">
+      <option name="closed" value="true" />
+      <created>1760718633187</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760718633187</updated>
+    </task>
+    <task id="LOCAL-00008" summary="style: change task list display format">
+      <option name="closed" value="true" />
+      <created>1760719514675</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1760719514675</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: add submenu for projects to view and add tasks">
+      <option name="closed" value="true" />
+      <created>1760720663298</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760720663298</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: add upper limit to project and task per project count">
+      <option name="closed" value="true" />
+      <created>1760731752534</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760731752534</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: correct typo in output message">
+      <option name="closed" value="true" />
+      <created>1760731795360</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760731795360</updated>
+    </task>
+    <task id="LOCAL-00012" summary="chore: update workspace">
+      <option name="closed" value="true" />
+      <created>1760731806353</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1760731806353</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: add utils">
+      <option name="closed" value="true" />
+      <created>1760732253882</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1760732253882</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: add is project name taken function">
+      <option name="closed" value="true" />
+      <created>1760732298185</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1760732298185</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: check for project name to not be taken">
+      <option name="closed" value="true" />
+      <created>1760732411596</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1760732411596</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: add is task name taken function">
+      <option name="closed" value="true" />
+      <created>1760732513389</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1760732513389</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/task" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init: set up starting skeleton for program" />
+    <MESSAGE value="feat: add project class" />
+    <MESSAGE value="feat: add memory store class" />
+    <MESSAGE value="fix: change data types of some variables" />
+    <MESSAGE value="feat: make main script and terminal user interface" />
+    <MESSAGE value="chore: create gitignore" />
+    <MESSAGE value="feat: add task class" />
+    <MESSAGE value="style: change task list display format" />
+    <MESSAGE value="feat: add submenu for projects to view and add tasks" />
+    <MESSAGE value="feat: add upper limit to project and task per project count" />
+    <MESSAGE value="fix: correct typo in output message" />
+    <MESSAGE value="chore: update workspace" />
+    <MESSAGE value="feat: add utils" />
+    <MESSAGE value="feat: add is project name taken function" />
+    <MESSAGE value="feat: check for project name to not be taken" />
+    <MESSAGE value="feat: add is task name taken function" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add is task name taken function" />
   </component>
 </project>
