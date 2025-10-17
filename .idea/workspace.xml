@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecb20c7c-11c9-481a-9f5e-ddb7ae3705f9" name="Changes" comment="init: set up starting skeleton for program">
-      <change afterPath="$PROJECT_DIR$/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ecb20c7c-11c9-481a-9f5e-ddb7ae3705f9" name="Changes" comment="feat: add memory store class">
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/project.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -83,7 +84,23 @@
       <option name="project" value="LOCAL" />
       <updated>1760713969310</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: add project class">
+      <option name="closed" value="true" />
+      <created>1760715665016</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1760715665016</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: add memory store class">
+      <option name="closed" value="true" />
+      <created>1760715927978</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760715927978</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +116,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init: set up starting skeleton for program" />
-    <option name="LAST_COMMIT_MESSAGE" value="init: set up starting skeleton for program" />
+    <MESSAGE value="feat: add project class" />
+    <MESSAGE value="feat: add memory store class" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add memory store class" />
   </component>
 </project>
