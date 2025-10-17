@@ -5,6 +5,7 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 import uuid
+import config
 
 class ProjectValidationError(ValueError):
     pass
@@ -56,9 +57,6 @@ class Project:
     created_at: str
     id: str
 
-    MAX_NAME_LEN: int = 30
-    MAX_DESCRIPTION_LEN: int = 150
-
     def __init__(self, name: str, description: Optional[str] = "") -> None:
         if name is None:
             name = ""
@@ -70,11 +68,11 @@ class Project:
         if not name:
             raise ProjectNameRequiredError("Project name is required and cannot be empty.")
 
-        if len(name) > self.MAX_NAME_LEN:
-            raise ProjectNameTooLongError(f"Project name must be at most {self.MAX_NAME_LEN} characters.")
+        if len(name) > config.PROJECT_MAX_NAME_LEN:
+            raise ProjectNameTooLongError(f"Project name must be at most {config.PROJECT_MAX_NAME_LEN} characters.")
 
-        if len(description) > self.MAX_DESCRIPTION_LEN:
-            raise ProjectDescriptionTooLongError(f"Project description must be at most {self.MAX_DESCRIPTION_LEN} characters.")
+        if len(description) > config.PROJECT_MAX_DESCRIPTION_LEN:
+            raise ProjectDescriptionTooLongError(f"Project description must be at most {config.PROJECT_MAX_DESCRIPTION_LEN} characters.")
 
         self.name = name
         self.description = description
@@ -132,10 +130,6 @@ class Project:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any], task_factory: Optional[callable] = None) -> "Project":
-        """
-        Rebuild a Project from a dict. If task_factory is provided, it's used to convert
-        task dicts into Task objects. Otherwise tasks remain as the raw items in data['tasks'].
-        """
         proj = cls(
             name=data["name"],
             description=data.get("description", ""),
