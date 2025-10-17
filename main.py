@@ -123,25 +123,66 @@ def manage_tasks_menu(project):
         return
 
     while True:
+        if not project.tasks:
+            print("This project has no tasks.\n")
+            return
+
         print("\n--- Tasks ---")
 
         for idx, task in enumerate(project.tasks, start=1):
             print(f"{idx}. {task.name} | status: {task.state.value} | id: {task.id}")
-            print(f"   Description: {task.description}")
+            print(f"   Description: {task.description or '(none)'}")
 
-        print(f"{len(project.tasks)+1}. Return to project menu")
+        print(f"{len(project.tasks) + 1}. Return to project menu")
 
-        choice = input("Select a task number to edit or go back: ").strip()
+        choice = input("Select a task number to manage or go back: ").strip()
 
-        if choice.isdigit():
-            idx = int(choice)
-
-            if 1 <= idx <= len(project.tasks):
-                edit_task(project.tasks[idx - 1])
-            elif idx == len(project.tasks) + 1:
-                break
-        else:
+        if not choice.isdigit():
             print("Invalid option.\n")
+            continue
+
+        idx = int(choice)
+
+        if idx == len(project.tasks) + 1:
+            break
+
+        if not (1 <= idx <= len(project.tasks)):
+            print("Invalid task number.\n")
+            continue
+
+        task = project.tasks[idx - 1]
+
+        while True:
+            if task not in project.tasks:
+                break
+
+            print(f"\n--- Task Menu: {task.name} ---")
+            print("1. Edit task")
+            print("2. Delete task")
+            print("3. View task details")
+            print("4. Return to tasks list")
+
+            action = input("> ").strip()
+
+            if action == "1":
+                edit_task(task)
+            elif action == "2":
+                confirm = input(f"Are you sure you want to delete task '{task.name}'? (y/N): ").strip().lower()
+                if confirm == "y":
+                    project.remove_task(task.id)
+                    print(f"Task '{task.name}' deleted.\n")
+
+                    if not project.tasks:
+                        print("No tasks left in this project. Returning to project menu.\n")
+                        return
+
+                    break
+            elif action == "3":
+                print(task.pretty())
+            elif action == "4":
+                break
+            else:
+                print("Invalid option.\n")
 
 def edit_task(task):
     print(f"\n--- Editing Task: {task.name} ---")
