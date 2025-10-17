@@ -2,7 +2,7 @@ from project import Project, ProjectValidationError
 from memory import MemoryStore
 from task import Task, TaskState
 from config import PROJECT_MAX_COUNT, TASK_MAX_COUNT
-from utils import is_project_name_taken
+from utils import is_project_name_taken, is_task_name_taken
 
 def show_projects(store: MemoryStore):
     print("\n--- Projects in Memory ---")
@@ -96,6 +96,7 @@ def edit_project(project, store: MemoryStore):
     if new_name and is_project_name_taken(store, new_name, exclude_id=project.id):
         print(f"A project with the name '{new_name}' already exists.\n")
         return
+
     new_desc = input(f"New description: ").strip()
 
     try:
@@ -179,7 +180,7 @@ def manage_tasks_menu(project):
             action = input("> ").strip()
 
             if action == "1":
-                edit_task(task)
+                edit_task(task, project)
             elif action == "2":
                 confirm = input(f"Are you sure you want to delete task '{task.name}'? (Y/N): ").strip().lower()
                 if confirm == "y":
@@ -198,19 +199,22 @@ def manage_tasks_menu(project):
             else:
                 print("Invalid option.\n")
 
-def edit_task(task):
+def edit_task(task: Task, project: Project):
     print(f"\n--- Editing Task: {task.name} ---")
     print("Leave a field empty to keep the current value.")
 
-    new_name = input(f"New name: ").strip()
+    name = input(f"New name: ").strip()
+    if is_task_name_taken(project, name):
+        print(f"A task with the name '{name}' already exists in this project.\n")
+        return
     new_desc = input(f"New description: ").strip()
 
     print(f"Current status: {task.state.value}")
     print("Change status? (1: TODO, 2: DOING, 3: DONE, Enter to keep)")
     state_choice = input("> ").strip()
 
-    if new_name:
-        task.name = new_name
+    if name:
+        task.name = name
     if new_desc:
         task.description = new_desc
     elif new_desc == "":
@@ -231,6 +235,9 @@ def add_task_to_project(project):
         return
 
     name = input("Enter task name: ").strip()
+    if is_task_name_taken(project, name):
+        print(f"A task with the name '{name}' already exists in this project.\n")
+        return
     desc = input("Enter task description (optional): ").strip()
 
     try:
