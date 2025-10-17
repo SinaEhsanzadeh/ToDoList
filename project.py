@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 import uuid
 import config
+from task import Task
+
 
 class ProjectValidationError(ValueError):
     pass
@@ -94,7 +96,6 @@ class Project:
         header = f"Project: {self.name}  (id: {self.id})"
         created = f"Created: {_format_created_at(self.created_at)}"
         task_count = f"Tasks: {len(self.tasks)}"
-
         desc = self.description or "(none)"
         wrapped_desc = textwrap.fill(desc, width=width, subsequent_indent="  ")
 
@@ -112,10 +113,10 @@ class Project:
             for i, t in enumerate(self.tasks, start=1):
                 t_name = getattr(t, "name", "<no-name>")
                 t_id = getattr(t, "id", "<no-id>")
-
                 t_state = getattr(t, "state", None)
-                state_part = f"[{t_state}]" if t_state is not None else ""
-                lines.append(f"  {i}. {state_part} {t_name} (id={t_id})".rstrip())
+                state_name = t_state.value if t_state is not None else "UNKNOWN"
+                lines.append(f"  {i}. {t_name} | status: {state_name} | id: {t_id}")
+
         lines.append("-" * 60)
         return "\n".join(lines)
 
@@ -127,6 +128,25 @@ class Project:
             "created_at": self.created_at,
             "tasks": [t.to_dict() if hasattr(t, "to_dict") else asdict(t) for t in self.tasks],
         }
+
+    def add_task(self, task: Task) -> None:
+        self.tasks.append(task)
+
+    def list_tasks(self) -> list[Task]:
+        return list(self.tasks)
+
+    def get_task_by_id(self, task_id: str) -> Task | None:
+        for t in self.tasks:
+            if t.id == task_id:
+                return t
+        return None
+
+    def remove_task(self, task_id: str) -> bool:
+        for i, t in enumerate(self.tasks):
+            if t.id == task_id:
+                del self.tasks[i]
+                return True
+        return False
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any], task_factory: Optional[callable] = None) -> "Project":
