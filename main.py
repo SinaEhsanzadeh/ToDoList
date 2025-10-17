@@ -1,6 +1,7 @@
 from project import Project, ProjectValidationError
 from memory import MemoryStore
 from task import Task, TaskState
+from config import PROJECT_MAX_COUNT, TASK_MAX_COUNT
 
 def show_projects(store: MemoryStore):
     print("\n--- Projects in Memory ---")
@@ -15,6 +16,11 @@ def show_projects(store: MemoryStore):
     print("--------------------------\n")
 
 def create_project_interactively(store: MemoryStore):
+    projects = store.list_projects()
+    if len(projects) >= PROJECT_MAX_COUNT:
+        print(f"Cannot create more projects. Maximum limit of {PROJECT_MAX_COUNT} reached.\n")
+        return
+
     name = input("Enter project name: ").strip()
     desc = input("Enter project description (optional): ").strip()
 
@@ -212,6 +218,10 @@ def edit_task(task):
     print("Task updated successfully.\n")
 
 def add_task_to_project(project):
+    if len(project.tasks) >= TASK_MAX_COUNT:
+        print(f"Cannot add more tasks. Maximum of {TASK_MAX_COUNT} tasks per project reached.\n")
+        return
+
     name = input("Enter task name: ").strip()
     desc = input("Enter task description (optional): ").strip()
 
