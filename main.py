@@ -1,6 +1,6 @@
 from project import Project, ProjectValidationError
 from memory import MemoryStore
-from task import Task, TaskState
+from task import Task, TaskState, InvalidDeadlineError, TaskValidationError
 from config import PROJECT_MAX_COUNT, TASK_MAX_COUNT
 from utils import is_project_name_taken, is_task_name_taken
 
@@ -145,7 +145,8 @@ def manage_tasks_menu(project):
         print("\n--- Tasks ---")
 
         for idx, task in enumerate(project.tasks, start=1):
-            print(f"{idx}. {task.name} | status: {task.state.value} | id: {task.id}")
+            deadline_str = task.deadline if task.deadline else "(no deadline)"
+            print(f"{idx}. {task.name} | status: {task.state.value} | deadline: {deadline_str} | id: {task.id}")
             print(f"   Description: {task.description or '(none)'}")
 
         print(f"{len(project.tasks) + 1}. Return to project menu")
@@ -213,6 +214,9 @@ def edit_task(task: Task, project: Project):
     print("Change status? (1: TODO, 2: DOING, 3: DONE, Enter to keep)")
     state_choice = input("> ").strip()
 
+    print(f"Current deadline: {task.deadline or '(none)'}")
+    new_deadline = input("New deadline (YYYY-MM-DD) or leave empty to keep/remove: ").strip()
+
     if name:
         task.name = name
     if new_desc:
@@ -227,6 +231,15 @@ def edit_task(task: Task, project: Project):
     elif state_choice == "3":
         task.state = TaskState.DONE
 
+    try:
+        if new_deadline:
+            task.update_deadline(new_deadline)
+        elif new_deadline == "":
+            task.update_deadline(None)
+    except InvalidDeadlineError as e:
+        print(f"Error updating deadline: {e}\n")
+        return
+
     print("Task updated successfully.\n")
 
 def add_task_to_project(project):
@@ -239,13 +252,13 @@ def add_task_to_project(project):
         print(f"A task with the name '{name}' already exists in this project.\n")
         return
     desc = input("Enter task description (optional): ").strip()
+    deadline = input("Enter task deadline (YYYY-MM-DD) or leave blank: ").strip()
 
     try:
-        task = Task(name=name, description=desc)
+        task = Task(name=name, description=desc, deadline=deadline if deadline else None)
         project.add_task(task)
         print(f"Task '{task.name}' added to project '{project.name}'.\n")
-
-    except Exception as e:
+    except (TaskValidationError, InvalidDeadlineError) as e:
         print(f"Error creating task: {e}\n")
 
 
