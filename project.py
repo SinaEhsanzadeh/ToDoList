@@ -133,7 +133,14 @@ class Project:
                 t_id = getattr(t, "id", "<no-id>")
                 t_state = getattr(t, "state", None)
                 state_name = t_state.value if t_state is not None else "UNKNOWN"
-                lines.append(f"  {i}. {t_name} | status: {state_name} | id: {t_id}")
+
+                t_deadline = getattr(t, "deadline", None)
+                if t_deadline:
+                    deadline_str = t_deadline.strftime("%Y-%m-%d")
+                else:
+                    deadline_str = "(no deadline)"
+
+                lines.append(f"  {i}. {t_name} | status: {state_name} | deadline: {deadline_str} | id: {t_id}")
 
         lines.append("-" * 60)
         return "\n".join(lines)
