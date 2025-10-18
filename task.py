@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date
 from enum import Enum
 from typing import Optional, Dict, Any
 import uuid
@@ -21,6 +21,9 @@ class TaskDescriptionTooLongError(TaskValidationError):
     pass
 
 class InvalidTaskStateError(TaskValidationError):
+    pass
+
+class InvalidDeadlineError(TaskValidationError):
     pass
 
 class TaskState(str, Enum):
@@ -46,6 +49,28 @@ def _format_created_at(iso_str: str) -> str:
     except Exception:
         return iso_str or "(unknown)"
 
+def _validate_deadline(deadline_str: str) -> str:
+    try:
+        deadline_date = datetime.strptime(deadline_str, "%Y-%m-%d").date()
+
+    except ValueError:
+        raise InvalidDeadlineError("Deadline must be in format YYYY-MM-DD.")
+
+    today = date.today()
+    if deadline_date < today:
+        raise InvalidDeadlineError("Deadline cannot be in the past.")
+
+    return datetime.combine(deadline_date, datetime.min.time()).replace(tzinfo=timezone.utc).isoformat()
+
+def _format_deadline(iso_str: Optional[str]) -> str:
+    if not iso_str:
+        return "(none)"
+    try:
+        dt = datetime.fromisoformat(iso_str)
+        return dt.strftime("%b %d, %Y")
+    except Exception:
+        return iso_str
+
 @dataclass(init=False)
 class Task:
     name: str
@@ -53,8 +78,9 @@ class Task:
     state: TaskState
     created_at: str
     id: str
+    deadline: Optional[str] = None
 
-    def __init__(self, name: str, description: Optional[str] = "") -> None:
+    def __init__(self, name: str, description: Optional[str] = "", deadline: Optional[str] = None) -> None:
         if name is None:
             name = ""
 
@@ -77,6 +103,11 @@ class Task:
         self.created_at = _now_iso()
         self.id = str(uuid.uuid4())
 
+        if deadline:
+            self.deadline = _validate_deadline(deadline)
+        else:
+            self.deadline = None
+
     def set_state(self, new_state: str | TaskState) -> None:
         if isinstance(new_state, str):
             self.state = TaskState.from_str(new_state)
@@ -87,6 +118,12 @@ class Task:
         else:
             raise InvalidTaskStateError(f"Invalid type for state: {type(new_state)}")
 
+    def update_deadline(self, new_deadline: Optional[str]) -> None:
+        if new_deadline is None or new_deadline.strip() == "":
+            self.deadline = None
+        else:
+            self.deadline = _validate_deadline(new_deadline.strip())
+
     def view(self) -> Dict[str, Any]:
         return {
             "id": self.id,
@@ -94,6 +131,7 @@ class Task:
             "description": self.description,
             "state": self.state.value,
             "created_at": self.created_at,
+            "deadline": self.deadline,
         }
 
     def pretty(self, width: int = 72) -> str:
@@ -104,6 +142,7 @@ class Task:
             f"Task: {self.name}  (id: {self.id})\n"
             f"State: {self.state.value}\n"
             f"Created: {_format_created_at(self.created_at)}\n"
+            f"Deadline: {_format_deadline(self.deadline)}\n"
             f"Description:\n  {wrapped_desc}\n"
             f"{'-'*50}"
         )
@@ -118,10 +157,12 @@ class Task:
         task = cls(
             name=data["name"],
             description=data.get("description", ""),
+            deadline=data.get("deadline"),
         )
         task.state = TaskState.from_str(data.get("state", TaskState.TODO.value))
         task.id = data.get("id", task.id)
         task.created_at = data.get("created_at", task.created_at)
+
         return task
 
     def __repr__(self) -> str:
