@@ -1,4 +1,5 @@
 services:
+  # PostgreSQL
   db:
     image: postgres:16
     environment:
@@ -8,6 +9,18 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+  # FastAPI App (with Poetry)
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://todo:todo@db:5432/tododb
+      MAX_NUMBER_OF_TASKS: 10
+    depends_on:
+      - db
+
 volumes:
-  db_data:
+  postgres_data:
