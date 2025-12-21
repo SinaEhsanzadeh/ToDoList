@@ -12,7 +12,7 @@ class TaskService:
         self.task_repo = task_repo
         self.project_repo = project_repo
 
-    def create_task(self, title: str, project_id: int, deadline: Optional[datetime] = None) -> int:
+    def create_task(self, title: str, description: str, project_id: int, deadline: Optional[datetime] = None) -> int:
         """Create a new task and return its ID."""
         if not self.project_repo.get(project_id):
             raise ValueError("Project does not exist")
@@ -28,6 +28,7 @@ class TaskService:
 
         return self.task_repo.add({
             "title": title.strip(),
+            "description": description.strip(),
             "project_id": project_id,
             "deadline": deadline,
             "status": Status.todo

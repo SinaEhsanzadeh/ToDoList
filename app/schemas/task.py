@@ -6,7 +6,7 @@ from app.models.task import Status
 
 class TaskCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=100, description="Task title")
-    description: Optional[str] = Field(None, max_length=500, description="Task description")
+    description: Optional[str] = Field(..., max_length=500, description="Task description")
     deadline: Optional[Union[datetime, str]] = Field(
         None,
         description="Deadline in formats: '2023-12-31', '2023-12-31 23:59', '2023-12-31T23:59:00', or natural language like 'tomorrow 2pm'"
