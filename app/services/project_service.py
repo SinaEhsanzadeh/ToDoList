@@ -1,6 +1,4 @@
 from typing import List, Optional
-from datetime import datetime
-
 
 class ProjectService:
     def __init__(self, repo):
@@ -53,19 +51,16 @@ class ProjectService:
             raise ValueError(f"Project #{project_number} not found")
         return project
 
-    # NEW: Update by sequential number
     def update_project_by_number(self, project_number: int, **updates):
         """Update project by its sequential display number."""
         project = self.get_project_by_number(project_number)
         self.update_project(project.id, **updates)
 
-    # NEW: Delete by sequential number
     def delete_project_by_number(self, project_number: int):
         """Delete project by its sequential display number."""
         project = self.get_project_by_number(project_number)
         self.delete_project(project.id)
 
-    # NEW: List projects in sequential order
     def list_projects_by_number(self):
         """List all projects ordered by their sequential number."""
         return self.repo.list_all_by_number()

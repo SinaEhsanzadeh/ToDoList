@@ -23,7 +23,6 @@ class TaskService:
         if not title or len(title.strip()) == 0:
             raise ValueError("Task title cannot be empty")
 
-        # Ensure deadline is None or a proper datetime
         if deadline and not isinstance(deadline, datetime):
             raise ValueError("Deadline must be a valid datetime object")
 
@@ -69,7 +68,6 @@ class TaskService:
         if invalid_fields:
             raise ValueError(f"Invalid fields: {', '.join(invalid_fields)}")
 
-        # Special handling for status -> closed_at
         if "status" in updates and updates["status"] == Status.done:
             updates["closed_at"] = datetime.utcnow()
 
@@ -101,7 +99,6 @@ class TaskService:
 
         return self.create_task(title, project.id, deadline)
 
-    # NEW: List tasks by project number
     def list_tasks_by_project_number(self, project_number: int):
         """List tasks using project sequential number."""
         project = self.project_repo.get_by_number(project_number)
@@ -110,7 +107,6 @@ class TaskService:
 
         return self.list_tasks_by_project(project.id)
 
-    # NEW: Get task by project number + task number
     def get_task_by_numbers(self, project_number: int, task_number: int):
         """Get task by project sequential number and task number."""
         project = self.project_repo.get_by_number(project_number)
@@ -124,7 +120,6 @@ class TaskService:
         task = self.get_task_by_numbers(project_number, task_number)
         self.update_task(task.id, **updates)
 
-    # NEW: Delete task by project number + task number
     def delete_task_by_numbers(self, project_number: int, task_number: int):
         """Delete task by project sequential number and task number."""
         task = self.get_task_by_numbers(project_number, task_number)

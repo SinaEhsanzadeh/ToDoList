@@ -27,15 +27,11 @@ class SQLProjectRepo:
         if project:
             deleted_number = project.project_number
 
-            # Delete the project (cascade will delete tasks)
             self.db.delete(project)
             self.db.commit()
 
-            # Renumber ALL remaining projects to fill gaps
-            # Get all projects ordered by current project_number
             all_projects = self.db.query(Project).order_by(Project.project_number).all()
 
-            # Renumber sequentially starting from 1
             for i, p in enumerate(all_projects, start=1):
                 if p.project_number != i:
                     p.project_number = i
@@ -108,11 +104,9 @@ class SQLTaskRepo:
             project_id = task.project_id
             task_number = task.task_number
 
-            # Delete the task
             self.db.delete(task)
             self.db.commit()
 
-            # Renumber remaining tasks in the same project
             remaining_tasks = self.db.query(Task).filter(
                 Task.project_id == project_id,
                 Task.task_number > task_number

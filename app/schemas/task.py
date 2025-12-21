@@ -84,7 +84,6 @@ class TaskUpdate(BaseModel):
 
     @validator('deadline', pre=True)
     def parse_deadline(cls, value: Any) -> Optional[datetime]:
-        # Reuse the same parsing logic
         return TaskCreate.parse_deadline.__func__(cls, value)
 
 

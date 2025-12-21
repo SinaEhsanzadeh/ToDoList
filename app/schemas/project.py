@@ -1,5 +1,8 @@
+import dotenv
 from pydantic import BaseModel, Field
 from typing import Optional
+import os
+
 
 
 class ProjectCreate(BaseModel):
